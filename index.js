@@ -58,6 +58,29 @@ server.delete('/users/:id', (req, res) => {
 })
 
 
+server.put('/users/:id', (req, res) => {
+    const thing = req.params.id;
+    const changesToThing = req.body;
+
+    db
+    .update(thing, changesToThing)
+    .then (wowey => {
+        if (wowey) {
+            res.status(200).json({
+                success: true,
+                wowey 
+            })
+        }
+        else {
+            res.status(404).json({
+                success:false,
+                message: 'To Quote The Server, Error 404!'
+            })
+        }
+    })
+})
+
+
 server.listen(9000, () => {
     console.log('Server Running on http:localhost:OVER9000!')
 })
